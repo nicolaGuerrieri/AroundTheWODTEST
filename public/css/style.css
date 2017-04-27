@@ -1,0 +1,235 @@
+body {
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	height: 100%;
+}
+
+form {
+	margin: 0;
+	height: 100%;
+}
+
+span {
+	cursor: pointer;
+}
+
+li {
+	cursor: pointer;
+}
+
+.contentPreFooter {
+	padding: 50px;
+	padding-top: 10px;
+	padding-bottom: 150px;
+	min-height: 100%;
+	height: auto;
+}
+
+a {
+	color: #00B7FF;
+}
+
+.divLuogo {
+	border: 1px solid #0fb8ad;
+	border-radius: 10px;
+	padding: 5px;
+	width: 96%;
+	margin: 5px;
+	margin-left: 10px
+}
+
+.ombra:hover {
+	background: #E4E4E4;
+}
+
+.footerHome {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+
+#map_container {
+	height: 30%;
+}
+
+.footer {
+	clear: both;
+	position: relative;
+	z-index: 10;
+	height: 10em;
+	margin-top: -10em;
+	width: 100%;
+	background: rgba(0, 0, 0, 0)
+		linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%) repeat
+		scroll 0 0;
+	color: white;
+}
+
+.footer span {
+	bottom: 0;
+	font-size: 10px;
+	position: absolute;
+}
+
+.coloreGradiente {
+	background: rgba(0, 0, 0, 0)
+		linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%) repeat
+		scroll 0 0;
+	color: white !important;
+}
+
+.spostami {
+	padding-top: 40px;
+	padding-right: 60px;
+}
+
+.descrizioneFooter {
+	padding-top: 40px;
+	padding-right: 20px;
+}
+
+.spostamiLeft {
+	padding-top: 40px;
+	padding-left: 60px;
+}
+
+.logoImg {
+	width: 200px;
+	height: 200px;
+}
+
+/*radio e checkbox*/
+#divLabel {
+	clear: both;
+	margin: 0 10px;
+}
+
+label {
+	width: 150px;
+	border-radius: 3px;
+	border: 1px solid #D1D3D4
+}
+
+/* hide input */
+input.radio:empty {
+	margin-left: -999px;
+}
+
+/* style label */
+input.radio:empty ~ label {
+	position: relative;
+	float: left;
+	line-height: 2.5em;
+	text-indent: 2.25em;
+	margin-top: 2em;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.navbar-inverse .navbar-brand {
+	color: white;
+}
+
+input.radio:empty ~ label:before {
+	position: absolute;
+	display: block;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	content: '';
+	width: 2.5em;
+	background: #D1D3D4;
+	border-radius: 3px 0 0 3px;
+}
+
+/* toggle hover */
+input.radio:hover:not (:checked ) ~ label:before {
+	content: '\2714';
+	text-indent: .9em;
+	color: #C2C2C2;
+}
+
+input.radio:hover:not (:checked ) ~ label {
+	color: #888;
+}
+
+/* toggle on */
+input.radio:checked ~ label:before {
+	content: '\2714';
+	text-indent: .9em;
+	color: white;
+	background-color: #1fc8db;
+}
+
+input.radio:checked ~ label {
+	color: #777;
+}
+
+
+input.ng-valid {
+	
+}
+
+input.ng-invalid {
+	
+}
+
+.errore {
+	border: 1px solid red;
+	color: red;
+	font-weight: bold;
+	border-radius: 25px;
+	width: 200px;
+}
+
+.erroreLittle {
+	border: 1px solid red;
+	color: red;
+	font-weight: bold;
+	border-radius: 25px;
+	width: 150px;
+}
+
+.ui-dialog-buttonpane {
+	text-align: center;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+	color: gray;
+	padding-right: 40px;
+}
+
+
+
+@media ( max-width : 767px) {
+	.spostami {
+		padding-top: 10px;
+		padding-right: 60px;
+
+	}
+	.spostamiLeft {
+		padding-top: 10px;
+		padding-left: 20px;
+		height: 35%;
+	}
+	.spostamiLeft>i {
+		font-size: 20px !important;
+	}
+	.descrizioneFooter{
+		font-size: 9px;
+		padding: 0;
+		padding-left: 10px;
+	}
+	.footer{
+		height: auto;
+	}
+	.navbar-header {
+    float: none;
+   }
+   .navbar-inverse .navbar-nav>li>a {
+		padding-left: 30px;
+	}
+	
+}

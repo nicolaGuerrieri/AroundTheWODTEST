@@ -1,0 +1,4 @@
+Avviare il servizio sul server forever per avviare l'app
+ forever start -a bin/www
+ 
+in conf-env.js fuori dalla root del progetto abbiamo la configurazione per leggere le chiavi social

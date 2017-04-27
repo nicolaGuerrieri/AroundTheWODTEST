@@ -1,0 +1,184 @@
+<html ng-app="helpParents">
+<head>
+
+<title>Help Parents</title>
+<meta charset="utf-8">
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta content="width=device-width,initial-scale=1,maximum-scale=1"
+	name="viewport">
+
+<meta name="author" content="Nicola Guerrieri">
+<meta name="description"
+	content="Guerrieri Nicola Sito personale di Nicola Guerrieri heroku java node.js programmatore bologna">
+<meta name="keywords" content=" Nicola Guerrieri">
+
+
+<meta HTTP-EQUIV="CONTENT-LANGUAGE" CONTENT="Italian">
+
+<script src="../bower_components/jquery.min.js"></script>
+
+<link href="../css/jquery-ui.min.css" rel="stylesheet">
+<link href="../css/bootstrap.css" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
+
+<link rel="stylesheet"
+	href="../fonts/font-awesome-4.6.3/css/font-awesome.min.css">
+
+<script types="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script
+	src="https://maps.googleapis.com/maps/api/js?&key=AIzaSyCmuhOq1fek6HJd6tvkyo2waH1vdv6a6H8&libraries=places" /> 
+<script src="../js/bootstrap.min.js"> </script>
+<script src="../js/util.js"></script>
+<script src="../js/HomeController.js"></script>
+<script src="../bower_components/angular-translate/angular-translate.js"></script>
+
+
+
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				$('#file').change(function() {
+					$('#nameFile').text($('#file').val());
+				});
+				
+				$( "#datepickerDa" ).datepicker({
+					format: 'dd.mm.yyyy',
+				    language: 'ru',
+				    autoclose: true,
+				    todayHighlight: true,
+				    orientation: "bottom auto"
+				});
+				$( "#datepickerA" ).datepicker({
+					format: 'dd.mm.yyyy',
+				    language: 'ru',
+				    autoclose: true,
+				    todayHighlight: true,
+				    orientation: "bottom auto"
+				});
+				var placeSearch, autocomplete;
+
+				autocomplete = new google.maps.places.Autocomplete((document
+						.getElementById('autocomplete')), {
+					types : [ 'geocode' ]
+				});
+				
+				
+				autocomplete.addListener('citta', fillInAddress);
+				google.maps.event.addListener(autocomplete, 'place_changed', function() {
+					$('#cerca').click();
+				});
+			});
+</script>
+</head>
+
+<body ng-controller="luogoCtrl" ng-init="inizia('Roma')">
+
+	<div class="contentPreFooter">
+
+		<nav class="navbar navbar-inverse coloreGradiente">
+			<div ng-include="'../pagineSoloClient/navbar.html'">
+			</div>
+		</nav>
+		
+		<div id="map_container"></div>
+		<br />
+		<div class="row text-center">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8">
+			<form name="myForm" ng-submit="salva()" novalidate style="height: auto">
+			<div>
+				<h2>{{'inserisci' | translate }}</h2>
+		<br />
+				<div class="input-group">
+					<input type="text" placeholder="{{'place' | translate }}"
+						id="autocomplete" ng-model="luogo.cercaPostoNew" ng-required="true"
+						class="form-control" name="citta" my-enter="cercaLuogo()"/> <span
+						class="input-group-btn">
+						<button type="button" id="cerca" ng-click="cercaLuogo()"
+							class="btn btn-info btn-secondary">{{ 'cerca' |
+							translate }}</button>
+					</span>
+				</div>
+				<div ng-show="submitted  && myForm.citta.$invalid" class="errore" >
+			      <div ng-show="myForm.citta.$invalid">{{'errorCitta' | translate }}</div>
+			    </div>
+				<br /> <input type="text" placeholder="{{'nome' | translate }}"   ng-required="true"
+					ng-model="luogo.nome" name="uName" class="form-control" />
+					
+				<div ng-show="submitted  && myForm.uName.$invalid" class="errore" >
+			      <div ng-show="myForm.uName.$invalid">{{'errorNome' | translate }}</div>
+			    </div>
+			    <br />
+				<textarea style="resize: none;" type="text" placeholder="{{'descrizione' | translate }}"    ng-required="true"  
+					ng-model="luogo.descrizione" class="form-control" name="desc"></textarea>
+				<div ng-show="submitted  && myForm.desc.$invalid" class="errore" >
+			      <div ng-show="myForm.desc.$invalid">{{'errorDesc' | translate }}</div>
+			    </div>
+				<br />
+				<div class="row text-center">
+					<div class="col-sm-3">
+						<div class="text-left">
+							<label for="fisso">{{'fisso' | translate }}</label>
+							<input type="checkbox" id="fisso" ng-model="luogo.fisso" class="" />
+						</div>
+						<div class="text-left">
+							<label for="aperto">{{'aperto' | translate }}</label>
+							<input type="checkbox" id="aperto" ng-model="luogo.aperto" class="" />
+						</div>
+					</div>
+					<div class="col-sm-3" >
+						<input type="text" placeholder="{{'orario' | translate }}" 
+						ng-disabled="luogo.aperto" ng-required="!luogo.aperto"
+						ng-model="luogo.orari" class="form-control"  name="orario"/> 
+						<div ng-show="submitted  && myForm.orario.$invalid" class="erroreLittle" >
+					      <div ng-show="myForm.orario.$invalid">{{'errorOrario' | translate }}</div>
+					    </div>
+					</div>
+					<div class="col-sm-3" >
+						<input type="text" ng-disabled="luogo.fisso" placeholder="{{'dal' | translate }}" 
+						 ng-required="!luogo.fisso"  name="datepickerDa"
+						ng-model="luogo.dal" class="form-control" id="datepickerDa"/>
+						<div ng-show="submitted  && myForm.datepickerDa.$invalid" class="erroreLittle" >
+					      <div ng-show="myForm.datepickerDa.$invalid">{{'errorDal' | translate }}</div>
+					    </div>
+					</div>
+					<div class="col-sm-3" >
+						<input type="text" ng-disabled="luogo.fisso" id="datepickerA" placeholder="{{'al' | translate }}" 
+						  ng-required="!luogo.fisso"  name="datepickerA"
+						ng-model="luogo.al" class="form-control" />
+						<div ng-show="submitted  && myForm.datepickerA.$invalid" class="erroreLittle" >
+					      <div ng-show="myForm.datepickerA.$invalid">{{'errorAl' | translate }}</div>
+					    </div>
+					</div>
+				</div>
+				<br />
+				<!--<input type="text" placeholder="{{'ristoro' | translate }}"  name="ristoro"  ng-required="true"
+					ng-model="luogo.ristoro" class="form-control" />
+				<div ng-show="submitted  && myForm.ristoro.$invalid" class="errore" >
+			      <div ng-show="myForm.ristoro.$invalid">{{'errorRistoro' | translate }}</div>
+			    </div><br />-->
+				<input type="text" placeholder="{{'attrezzature' | translate }}"   name="attrezzature"  ng-required="true"  
+ 					ng-model="luogo.attrezzatura" class="form-control" /><br />  
+				<div ng-show="submitted  && myForm.attrezzature.$invalid" class="errore" > 
+					      <div ng-show="myForm.attrezzature.$invalid">{{'errorAttrezzatura' | translate }}</div> 
+			    </div> <br />
+				<label class="btn btn-default btn-file">
+				    Browse <input  type="file" id="file" file-model="luogo.file" ng-model="bo" style="display: none" /><br />
+				</label><br/>
+			     <span id="nameFile"></span><br/>
+				<button type="submit"
+					class="btn btn-info">{{ 'salva' | translate }}</button>
+			  </div>
+			</form>
+			</div>
+			<div class="col-sm-2"></div>
+
+		</div>
+	</div>
+	<div ng-include="'../pagineSoloClient/footer.html'"></div>
+</body>
+</html>
