@@ -165,6 +165,7 @@ router.post('/upload', upload.single('file'), function(req, res) {
 			"valido_da" : nuovoEvento.dal,
 			"valido_a" : nuovoEvento.al,
 			"utente" : utente,
+			"listaAttivita" : nuovoEvento.listaAttivita,
 			"foto" : nomeImmagine
 		}
 		log.info('/insert', luogoEvento);
