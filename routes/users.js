@@ -10,7 +10,7 @@ var passport = require('passport');
 var headers; 
 const opts = {
     logDirectory:'../log',
-    fileNamePattern:'test_users_<DATE>.log',
+    fileNamePattern:'users_<DATE>.log',
     dateFormat:'YYYY.MM.DD'
 };
 //const log = require('simple-node-logger').createSimpleLogger();
@@ -19,7 +19,10 @@ var upload = multer({
 	dest : 'uploads/'
 })
 var Schema = mongoose.Schema;
-mongoose.connect('mongodb://127.0.0.1/test');
+
+var configEnv= require('../../conf-env.js'); 
+console.log(configEnv.ambiente.urldb);
+mongoose.connect(configEnv.ambiente.urldb);
 var conn = mongoose.connection;
 Grid.mongo = mongoose.mongo;
 

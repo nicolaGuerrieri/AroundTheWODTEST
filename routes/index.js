@@ -2,22 +2,27 @@ var express = require('express');
 var router = express.Router();
 var mongo = require('mongodb');
 var assert = require('assert');
-var url = require('url');
-var passport = require('passport');
+var urlD = require('url');
+var passport = require('passport'); 
 const opts = {
     logDirectory:'../log',
-    fileNamePattern:'test_index_<DATE>.log',
+    fileNamePattern:'index_<DATE>.log',
     dateFormat:'YYYY.MM.DD'
 };
 //const log = require('simple-node-logger').createSimpleLogger();
-const log = require('simple-node-logger').createRollingFileLogger( opts )
-var url = 'mongodb://localhost:27017/test';
+const log = require('simple-node-logger').createRollingFileLogger( opts );
+ 
+var configEnv= require('../../conf-env.js'); 
+console.log(configEnv.ambiente.urldb);
+
 var db;
 var channel = "/dev";
 router.use(passport.initialize());
 router.use(passport.session());
 
-mongo.MongoClient.connect(url, function(err, data) {
+
+
+mongo.MongoClient.connect(configEnv.ambiente.urldb, function(err, data) {
 	if (err)
 		throw err;
 	db = data;
