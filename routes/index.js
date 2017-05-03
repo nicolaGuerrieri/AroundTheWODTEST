@@ -286,21 +286,7 @@ router.get('/getListaForCity', function(req, res) {
 	});
 });
 
-module.exports = router;
-var express = require('express');
-var router = express.Router();
-var mongo = require('mongodb');
-var assert = require('assert');
-var url = require('url');
-var passport = require('passport');
-
-var url = 'mongodb://localhost:27017/test';
-var db;
-
-router.use(passport.initialize());
-router.use(passport.session());
-
-mongo.MongoClient.connect(url, function(err, data) {
+ mongo.MongoClient.connect(url, function(err, data) {
 	if (err)
 		throw err;
 	db = data;
