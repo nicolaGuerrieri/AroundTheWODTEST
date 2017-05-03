@@ -286,11 +286,6 @@ router.get('/getListaForCity', function(req, res) {
 	});
 });
 
- mongo.MongoClient.connect(url, function(err, data) {
-	if (err)
-		throw err;
-	db = data;
-});
 
 router.all('/verify', function(req, res) {
 		log.info('/verify', channel, '', '');
